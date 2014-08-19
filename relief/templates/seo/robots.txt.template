@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Crawl-delay: 5
+
+Sitemap: ___HOME_URL___sitemap.xml

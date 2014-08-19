@@ -1,0 +1,10 @@
+<script async type="text/javascript">
+  document.body.style.visibility = "hidden";
+  document.body.className = document.body.className + " waitjs";
+  document.body.className = document.body.className + " transition";
+
+  function __waitjs() {
+    document.body.className = document.body.className.replace("waitjs", "");
+    document.body.style.visibility = "visible";
+  }
+</script>

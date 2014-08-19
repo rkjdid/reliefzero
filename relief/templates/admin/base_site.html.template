@@ -1,0 +1,11 @@
+{% extends "admin:admin/base_site.html" %}
+{% load i18n %}
+
+{% block title %}___PAGE_TITLE___ | {{ title }}{% endblock %}
+
+{% block branding %}
+{% include "snippets/waitjs.html" %} {# Random block near <body> open tag #}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">___PAGE_TITLE___</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

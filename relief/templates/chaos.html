@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{ relief_title }}{% endblock %}
+
+{% block posthead %}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/chaos.css" />
+{% endblock %}
+
+{% block body %}
+  <p style="opacity:0;">relief<a class="lighter" id="fkd" href="/"></a>zero</p>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $.fn.textWidth = function(){
+      var html_org = $(this).html();
+      var html_calc = '<span>' + html_org + '</span>';
+      $(this).html(html_calc);
+      var width = $(this).find('span:first').width();
+      $(this).html(html_org);
+      return width;
+    };
+
+    $(window).load(function () {
+      var rdm = Math.random().toString(36).substring(2,Math.random()*20+3);
+      $("#fkd").attr("href", "/" + rdm).html(rdm);
+      var p = $('p');
+      $(p).width($(p).textWidth()).css('opacity', '');
+    });
+  </script>
+{% endblock %}

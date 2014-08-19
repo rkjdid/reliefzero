@@ -1,0 +1,9 @@
+Django==1.6.5
+PIL==1.1.7
+South==1.0
+argparse==1.2.1
+django-apptemplates==0.0.1
+httpagentparser==1.7.3
+psycopg2==2.5.3
+pycurl==7.19.5
+wsgiref==0.1.2
