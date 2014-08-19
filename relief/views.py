@@ -15,6 +15,7 @@ import re
 # URLs to be treated differently, because everyone is unique
 customUrls = {
   'denyIE' : "1111",      # iefailpage (<9)
+  'mp3t34z' : "DOFC",     # tonte soundcloud teaz snippet
 }
 
 # Set of default parameters available in all views
@@ -65,6 +66,7 @@ def operate(request, path=""):
     "links" : p.froms,
     "url": path,
     "styles": styles,
+    "teaz": ( path == customUrls['mp3t34z'] ), # mp3 teaz hack
     "smooth_loading" : p.smooth_loading,
     "background" : p.page_background,
   }
@@ -103,11 +105,26 @@ def staticRender(request, target, content_type):
 
 # Static binary serve (pdf, jpg, ..)
 def staticServe(request, target, content_type):
-  f = open(target, 'rb')
+  try:
+    f = open(target, 'rb')
+  except:
+    return redirect('/', context_instance=RequestContext(request))
+
   content = f.read()
   f.close()
   fname = os.path.basename(os.path.normpath(target))
 
-  response = HttpResponse(content, content_type)
-  response['Content-Disposition'] = 'attachment; filename=%s' % fname
+  response = HttpResponse(content)
+  response['Content-Length'] = os.path.getsize(target)
+  response['Content-Disposition'] = 'filename=%s' % fname
+  response['Content-Type'] = content_type
+  # force content-type by extension ? I iz not a static server.
+
   return response
+
+# MUSCLE
+def muscle(request):
+  return render_to_response(
+    'MUSCLE.html',
+    context_instance=RequestContext(request)
+  )

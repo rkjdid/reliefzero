@@ -1,3 +1,4 @@
+import os.path
 from django.conf.urls import patterns, include, url
 
 from zero import settings
@@ -36,8 +37,33 @@ urlpatterns += patterns(
        'content_type' : 'application/xml'}),
 )
 
+# Static shit
 urlpatterns += patterns(
   '',
+  url(r'^ddpresse$', 'relief.views.staticServe',
+      {'target': os.path.join(settings.STATIC_ROOT, 'other/appendice-Operandi_Collection_1.pdf'),
+       'content_type' : 'application/pdf'}),
+  url(r'^collection_zero.pdf$', 'relief.views.staticServe',
+      {'target': os.path.join(settings.STATIC_ROOT, 'other/appendice-Operandi_Collection_0.pdf'),
+       'content_type' : 'application/pdf'}),
+  url(r'^collection_une.pdf$', 'relief.views.staticServe',
+      {'target': os.path.join(settings.STATIC_ROOT, 'other/appendice-Operandi_Collection_1.pdf'),
+       'content_type' : 'application/pdf'}),
+  # url(r'^collection_deux.pdf$', 'relief.views.staticServe',
+  #     {'target': os.path.join(settings.STATIC_ROOT, 'other/appendice-Operandi_Collection_2.pdf'),
+  #      'content_type' : 'application/pdf'}),
+  url(r'^collection_trois.pdf$', 'relief.views.staticServe',
+      {'target': os.path.join(settings.STATIC_ROOT, 'other/appendice-Operandi_Collection_3.pdf'),
+       'content_type' : 'application/pdf'}),
+  # url(r'^collection_une.pdf')
+
+)
+
+urlpatterns += patterns(
+  '',
+  # MUSCLE
+  url(r'^$', 'relief.views.muscle'),
+
   # Main sh1t
   url(r'^(?P<path>.*)$', 'relief.views.operate', name='operate'),
 )

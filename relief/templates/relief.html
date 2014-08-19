@@ -35,6 +35,12 @@
      {% endfor %}
     </div>
   </section>
+{# TonTeT34Z hack #}
+  {% if teaz %}
+    <style>iframe{display:none;}</style>
+    {% include "snippets/teaz.html" %}
+  {% endif %}
+{# endH4ck #}
 {% endblock %}
 
 {% block script %}
