@@ -111,3 +111,50 @@ def staticServe(request, target, content_type):
   response = HttpResponse(content, content_type)
   response['Content-Disposition'] = 'attachment; filename=%s' % fname
   return response
+
+
+# teaz
+def video(request, page_title, target_url="/", vimeo_id=None, background_color="#ffffff", skip_black=True, **kwargs):
+  """
+  **kwargs will be passed to clean_video_sources
+  """
+  params = dict()
+  params['page_title'] = page_title
+  params['target_url'] = target_url
+  params['background_color'] = background_color
+  params['skip_black'] = skip_black
+
+  if vimeo_id:
+    params['vimeo_id'] = vimeo_id
+
+  params['sources'] = clean_video_sources(**kwargs)
+
+  return render_to_response(
+    'video.html',
+    dictionary=params,
+    context_instance=RequestContext(request)
+  )
+
+def clean_video_sources(**kwargs):
+  """
+  Example for kwargs:
+  kwargs = {
+    'video/mp4': 'path/to/example.mp4'
+    'video/ogg': 'path/to/example.ogg'
+  }
+  see __supported_video_types for valid key values,
+  any other key value for kwargs will be ignored
+  """
+  __supported_video_types = ["video/mp4", "video/ogg"]
+  sources = dict()
+  for k, v in kwargs.iteritems():
+    if k in __supported_video_types:
+      p = os.path.join(settings.STATIC_ROOT, v)
+      try:
+        open(p)
+      except:
+        continue # file not found
+
+      sources[k] = os.path.join(settings.STATIC_URL, v)
+
+  return sources

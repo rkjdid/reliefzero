@@ -38,6 +38,18 @@ urlpatterns += patterns(
 
 urlpatterns += patterns(
   '',
+
+  # sample call to video view
+  # url(r'^$', 'relief.views.video',
+  #     {
+  #       'target_url': '/home',
+  #       'page_title': 'Matabase',
+  #       'vimeo_id': 104282882,
+  #       'background_color': '#ffffff',
+  #       'video/mp4': 'other/teazer.mp4',
+  #     }
+  # ),
+
   # Main sh1t
   url(r'^(?P<path>.*)$', 'relief.views.operate', name='operate'),
 )
