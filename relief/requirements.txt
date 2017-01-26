@@ -1,8 +1,0 @@
-Django==1.6.5
-Pillow==2.6.1
-South==1.0
-django-apptemplates==0.0.1
-flup==1.0.2
-httpagentparser==1.7.3
-psycopg2==2.5.3
-wsgiref==0.1.2

@@ -1,0 +1,19 @@
+{% extends "admin:admin/base.html" %}
+{% load static %}
+
+{% block extrahead %}{{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static "kontrol/css/base.css" %}"/>
+  <link rel="shortcut icon" href="{% static "img/default.png" %}"type="image/x-icon"/>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" %}"/>
+{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block footer %}{{ block.super }}
+  <script src="{% static "web/js/lib/jquery.1.10.2.min.js" %}"></script>
+  <script src="{% static "web/js/lib/jquery-ui.1.10.3.min.js" %}"></script>
+  <script src="{% static "web/js/lib/spectrum/spectrum.js" %}"></script>
+  <link rel="stylesheet" href="{% static "web/js/lib/spectrum/spectrum.css" %}" />
+  <script src="{% static "web/js/lib/common.js" %}"></script>
+  <script type="text/javascript" src="{% static "admin/js/base.js" %}"></script>
+{% endblock %}

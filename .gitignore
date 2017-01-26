@@ -1,27 +1,16 @@
-# binaries
-*.pyc
-
-# ide shit
+# jetbrains shit
 .idea/
 
-# deploy specific shit
-zero/settings.py
-zero/settings_deployment.py
+# js shit
+node_modules/
+bower_components/
 
-# south migrations
-migrations/
+# db
+rzero.db
 
-# scss config
-config.rb
-css/
+# py objects
+*.py[co]
 
-# admin collected files
-relief/static/admin/
-!relief/static/admin/img/icon_addlink.gif
-!relief/static/admin/img/icon_deletelink.gif
-
-# templated files
-relief/templates/admin/base_site.html
-relief/templates/seo/robots.txt
-relief/templates/seo/sitemap.xml
-
+# django statics
+media/
+static/

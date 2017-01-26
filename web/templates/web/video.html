@@ -1,0 +1,88 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block posthead %}
+  <style>
+    video {
+      position: fixed;
+      display: block;
+
+      width: 100%;
+      height: 100%;
+      background: {{ background_color }};
+      z-index: 0;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 0;
+    }
+
+    a.skip {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      width: 45px;
+      z-index: 9;
+    }
+
+    a.skip img {
+      width: 100%;
+    }
+  </style>
+
+
+{% endblock %}
+
+{% block script %}
+  <script>
+    var video = document.getElementById("video");
+
+    window.onload = function() {
+      {% if vimeo_id %}
+      if (typeof (video.play) !== 'function') {
+        $(video).remove();
+        $('body').append('<iframe src="//player.vimeo.com/video/{{ vimeo_id }}?autoplay=1&badge=0&title=0&byline=0&color=222222&portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+        $('a.skip').css('bottom', '50px');
+        return;
+      }
+      {% else %}
+        {# TODO unsupported browser #}
+      {% endif %}
+
+      video.play();
+    };
+
+    video.onended = function(e) {
+      $(video).unbind('click');
+      window.location.href = "{{ target_url }}";
+    };
+
+    $(video).click(function() {
+      if (this.paused)
+        this.play();
+      else
+        this.pause();
+    });
+  </script>
+{% endblock %}
+
+{% block body %}
+  <video id="video" width="960">
+    {% for k, v in sources.items %}
+    <source src="{{ v }}" type="{{ k }}">
+    {% endfor %}
+  </video>
+  <a href="{{ target_url }}" class="skip">
+    {% if skip_black %}
+      <img src="{% static "web/img/skip_black.png" %}"/>
+    {% else %}
+      <img src="{% static "web/img/skip_white.png" %}" />
+    {% endif %}
+  </a>
+{% endblock %}

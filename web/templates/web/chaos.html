@@ -1,0 +1,13 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}{{ relief_title }}{% endblock %}
+
+{% block posthead %}
+  {% if debug %}
+  <script src="{% static "web/js/lib/jquery.js" %}"></script>{% else %}
+  <script src="{% static "web/js/lib/jquery.min.js" %}"></script>{% endif %}
+{% endblock %}
+
+{% block body %}
+  <p style="opacity:0;">relief<a class="lighter" id="fkd" href="/"></a>zero</p>
+{% endblock %}

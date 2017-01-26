@@ -1,1 +1,0 @@
-from zero.settings import *
